@@ -26,12 +26,13 @@ namespace KAutoHelper
         static string REMOVE_SCREEN_FROM_DEVICES = "adb -s {0} shell rm -f \"{1}\"";
         static string GET_SCREEN_RESOLUTION = "adb -s {0} shell dumpsys display | Find \"mCurrentDisplayRect\"";
         const int DEFAULT_SWIPE_DURATION = 100;
-
         #endregion
 
-
+        #region folder path
         static string ADB_FOLDER_PATH = "";
         static string ADB_PATH = "";
+        #endregion
+
         public static string SetADBFolderPath(string folderPath)
         {
             ADB_FOLDER_PATH = folderPath;
@@ -156,7 +157,7 @@ namespace KAutoHelper
         public static List<string> GetDevices()
         {
             List<string> ListDevices = new List<string>();
-            string input = KAutoHelper.ADBHelper.ExecuteCMD("adb devices");
+            string input = ExecuteCMD("adb devices");
 
             string pattern = @"(?<=List of devices attached)([^\n]*\n+)+";
 
@@ -228,7 +229,6 @@ namespace KAutoHelper
         public static string GetDeviceName(string deviceID)
         {
             string name = "";
-
             string cmd = "";
             var res = ExecuteCMD(cmd);
 
